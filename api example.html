@@ -1,0 +1,181 @@
+<html>
+<head>
+	<title>SoundBlastr</title>
+	<link rel="stylesheet" href="bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	
+<script type='text/javascript'>
+
+		
+
+</script>
+	<script src="raphael-min.js"></script>
+	<script src="analytics.js"></script>
+	<script src="popup.js"></script>
+<script>
+	$(function() {
+
+		$('#backtotop').fadeOut("fast");
+
+		$(window).scroll(function() { // when the page is scrolled run this
+			if($(this).scrollTop() != 0) { // if you're NOT at the top
+				$('#backtotop').fadeIn("fast"); // fade in
+			} else { // else
+			$('#backtotop').fadeOut("fast"); // fade out
+			}
+		});
+
+		$('#backtotop').click(function () {
+			$('body,html').animate({
+				scrollTop: 0
+			}, 800);
+			return false;
+		});
+
+		$('a').click(function(){
+			$('html, body').animate({
+				scrollTop: $( $(this).attr('href') ).offset().top
+			}, 500);
+		return false;
+		});
+		
+		$.getJSON('http://demo.slashdb.com/db/OpenJC/police_callcode_type.json?').done(function(data) {
+			var types = [];
+			for(var i=0; i < data.length; i++){
+				types[i] = data[i].description;
+			}
+			types.sort();
+			types.forEach(function(type) {
+				$( "#dropdown" ).append( '<li class="droptypes"><a href="#">'+type+'</a></li>' )
+				
+			});
+			
+			
+		});
+		
+		$.getJSON('http://demo.slashdb.com/db/OpenJC/police_injcode/description/INJURY/police_calls.json').done(function(data) {
+			
+			var array = [];
+			for(var i=0; i < data.length; i++){
+				array[i] = data[i].time_rec.substring(5,10);;
+			//	alert(data[i].time_rec);
+			}
+			var counts = {};
+			array.map( function (a) { if (a in counts) counts[a] ++; else counts[a] = 1; } );
+			//alert(Object.keys(counts));
+			
+			for(key in counts) {
+				$( "<tr><td>"+[key]+"</td><td>"+counts[key]+"</td></tr>").insertAfter( "#tableheader" );
+			}
+		});
+	});
+	</script>
+</head>
+<body>
+		<!-- Navbar -->
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+	  <div class="container">
+	    <div class="navbar-header">
+	      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a href="../" class="navbar-brand">SoundBlast</a>
+	    </div>
+	    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+	      <ul class="nav navbar-nav">
+	        <li>
+	          <a href="#about">About</a>
+	        </li>
+	        <li>
+	          <a href="#how">How It Works</a>
+	        </li>
+	        <li>
+	          <a href="#songs">Sample Artists</a>
+	        </li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="#login">Signup</a></li>
+	        <li><a href="#login">Login</a></li>
+	      </ul>
+	    </nav>
+	  </div>
+	</header>
+
+	<section id="hero">
+		<div class="jumbotron">
+			<h1>Welcome to SoundBlastr</h1>
+			<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, voluptas, voluptatibus, aut minus impedit odit inventore dolor ipsam ab quaerat quibusdam eum voluptatem doloribus illo nam dicta accusamus. Quae, saepe?</h3>
+		</div>
+
+		<div class="btn btn-block btn-success big-btn">Sign Up!</div>
+	</section>
+
+	<section id="how">
+		<div class="container">
+			<h2>How It Works</h2>
+			<div class="row">
+				<div class="col-lg-2">
+					<h3>Sign Up</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae, pariatur natus voluptates commodi rerum illum nulla laboriosam explicabo! Numquam, provident dolores a quia quam dignissimos tempore obcaecati fugiat dolore natus?</p>
+				</div>
+				<div class="col-lg-2">
+					<h3>List Your Prefs</h3>
+					<img class="img-responsive" src="http://a.gifb.in/072011/1310646593_satr_trek__head_tennis.gif">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, ullam, ad, laborum dolorem aliquam nobis ducimus veniam inventore excepturi beatae laudantium quam aperiam cum quia ab enim nesciunt. Temporibus, reprehenderit!</p>
+				</div>
+				<div class="col-lg-8">
+					<h3>Enjoy Your Music!</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, aperiam, voluptates delectus nesciunt iusto dolor vitae pariatur dolorem debitis reprehenderit deleniti eaque recusandae libero totam doloribus temporibus doloremque! Autem, assumenda.</p>
+				</div>
+			</div>
+		
+			<div class="btn-group">
+  
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					Action <span class="caret"></span>
+				</button>
+					<ul class="dropdown-menu" role="menu" id="dropdown">
+					</ul>
+			</div>
+			<br><br>
+			
+			<table class="table">
+			<tr id="tableheader">
+				<th>Date</th>
+				<th>Count</th> 
+			</tr>
+			<!--<tr><td>test</td><td>XXX</td></tr>-->
+			</table>
+		
+		<div id="holder"></div>
+		</div>
+	</section>
+
+</body>
+<footer>
+	<a href="#" class="btn btn-danger btn-mini pull-right" id="backtotop"><i class="icon-white icon-arrow-up"></i> Back To Top</a>
+</footer>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

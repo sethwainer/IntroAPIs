@@ -1,0 +1,23 @@
+What is an API
+
+What do the responses look like?
+	XML
+	JSON
+
+Example of an API and documentation:
+	http://www.quickbase.com/api-guide/index.html#do_query.html
+	
+	database:
+	https://cityofnewark.quickbase.com/db/bhx9b5r2a?a=td
+
+	block = fid 14
+
+	Activity: make an api call on your browser that pull all vacant properties on the 3014 block
+
+			https://cityofnewark.quickbase.com/db/bhx9b5r2a?a=API_DoQuery&apptoken=ca8k3wkce9gt5udycfrsgdpsngpd&query={14.EX.%273014%27}
+
+Example of JSON API:
+	http://demo.slashdb.com/db/OpenJC.html
+	http://demo.slashdb.com/db/OpenJC/police_calls.json?limit=41
+
+Using Jquery to Make API Calls
