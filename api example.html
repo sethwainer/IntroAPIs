@@ -41,8 +41,9 @@
 		return false;
 		});
 		
-		/*$.getJSON('http://demo.slashdb.com/db/OpenJC/police_callcode_type.json?').done(function(data) {
-			var types = [];
+		$.getJSON('http://demo.slashdb.com/db/OpenJC/police_callcode_type.json?').done(function(data) {
+			alert(data);
+			/*var types = [];
 			for(var i=0; i < data.length; i++){
 				types[i] = data[i].description;
 			}
@@ -50,10 +51,10 @@
 			types.forEach(function(type) {
 				$( "#dropdown" ).append( '<li class="droptypes"><a href="#">'+type+'</a></li>' )
 				
-			});
+			//});*/
 			
 			
-		});*/
+		});
 		
 		$.getJSON('http://demo.slashdb.com/db/OpenJC/police_injcode/description/INJURY/police_calls.json').done(function(data) {
 			
@@ -140,6 +141,7 @@
 					Action <span class="caret"></span>
 				</button>
 					<ul class="dropdown-menu" role="menu" id="dropdown">
+						<li>option 1</li>
 					</ul>
 			</div>
 			<br><br>
