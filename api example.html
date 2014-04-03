@@ -42,16 +42,17 @@
 		});
 		
 		$.getJSON('http://demo.slashdb.com/db/OpenJC/police_callcode_type.json?').done(function(data) {
-			alert(data);
-			/*var types = [];
+			//alert(data);
+			var types = [];
 			for(var i=0; i < data.length; i++){
 				types[i] = data[i].description;
 			}
+			alert(data[3].description);
 			types.sort();
-			types.forEach(function(type) {
+			/*types.forEach(function(type) {
 				$( "#dropdown" ).append( '<li class="droptypes"><a href="#">'+type+'</a></li>' )
 				
-			//});*/
+			});*/
 			
 			
 		});
